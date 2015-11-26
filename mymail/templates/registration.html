@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{%load staticfiles %}
+<head>
+
+	<title>Account Created  Successfully</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/pepper_style.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-theme.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-social.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/font-awesome.min.css' %}"/>
+</head>
+<body class="pepper-bg-gray">
+
+    <div class="col-md-12" style="height: 100px;background: white">
+        <img src= "{% static 'mymail/pepper.jpg' %}" alt="pepper" height="50" width="50"><label style="font-size: xx-large">Mail</label>
+    </div>
+    <div class="col-md-7" style="height: 650px;margin-top: 1%;background: ivory">
+        <img id="slide" src="" width="100%" height="100%">
+    </div>
+     <div class="col-md-5" id="logindiv" style="margin-top: 1%">
+       
+            <h1 class="margin-bottom-15">Account created</h1>
+            <form class="form-horizontal pepper-container pepper-login-form-1 margin-bottom-30" role="form" action="#" method="post">
+            Please <a href = "/../mymail">Login</a> here               </form></div>
+    
+	<script type="text/javascript" src="{%static 'mymail/jquery-1.11.1.min.js' %}"></script>
+	<script type="text/javascript" src="{%static 'mymail/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.flip.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.filp.min.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.min.js'%}"></script>
+        <script>
+            var images = ["{% static 'mymail/ironman1.jpg' %}","{% static 'mymail/ironman2.jpg' %}","{% static 'mymail/ironman3.jpg' %}","{% static 'mymail/ironman1.jpg' %}"];
+
+            function slideshow(options) {
+                var defaults ={
+                    fadeInSpeed:1000,
+                    fadeOutSpeed:1000,
+                    slideLength:4000
+                }
+
+               
+                var settings= $.extend({},defaults,options);
+                
+                var $slide = $('#slide');
+                
+                var slideIndex=0;
+
+                
+                nextSlide();
+
+                function nextSlide(){
+                    
+                    $slide[0].src = images[slideIndex];
+                    
+                    $slide.fadeIn(settings.fadeInSpeed,function(){
+                        setTimeout(function(){
+                            $slide.fadeOut(settings.fadeOutSpeed,nextSlide);
+                           
+                           slideIndex = ++slideIndex % images.length;
+                        },settings.slideLength); 
+                    });
+                }
+            }
+            
+        </script>
+</body>
+</html>

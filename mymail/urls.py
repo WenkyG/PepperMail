@@ -4,6 +4,9 @@ from . import views
 
 urlpatterns = [
 
-    url(r'^create_account', 'mymail.views.registration'),
+    url(r'^$', 'mymail.views.home'),
+    url(r'^registration/$', 'mymail.views.registered'),
+		url(r'^validate/$', 'mymail.views.user_validate'),
+		# url(r'^validate/$', 'mymail.views.user_validate'),   
     # url(r'^login', 'mymail.views.login'),
 ]
