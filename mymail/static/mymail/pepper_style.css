@@ -1,0 +1,144 @@
+
+
+*, body { font-family: 'Open Sans', sans-serif; }
+body { margin-bottom: 30px; }
+h1 {
+	font-weight: 300;
+	font-size: 36px;
+	line-height: normal;
+	margin: auto;
+	margin-top: 20px;
+	text-align: center;
+}
+h2 {
+	font-weight: 500;
+	font-size: 20px;
+	line-height: normal;
+	margin: auto;
+	margin-bottom: 30px;
+	text-align: center;
+	color: #09F;
+}
+
+.green { color: #3C3; }
+.gray { color: #999; }
+
+.form-horizontal .control-label { padding-top: 0; }
+.form-horizontal.pepper-payment-form .radio.pepper-no-padding-top {	padding-top: 0; }
+.control-wrapper {
+	position: relative;
+	padding-left: 30px;
+}
+.control-wrapper label.fa-label {
+	position: absolute;
+	left: 4px;
+	top: 6px;
+}
+.form-group:last-child { margin-bottom: 0; }
+.form-horizontal .control-label { margin-bottom: 10px; }
+.table { margin-bottom: 0; }
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, 
+.table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	vertical-align: middle;
+}
+.pepper-form-list-container { max-width: 600px; }
+.pepper-input-icon-container { position: relative; }
+.pepper-input-icon-container .fa {
+	color: gray;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+.pepper-input-icon-container input, 
+.pepper-input-icon-container textarea {
+	padding-left: 30px;
+}
+.pepper-container {
+	background-color: rgba(255,255,255,0.8);
+	border: 1px solid #dedede;
+	border-radius: 8px;
+	margin: 0 auto;
+	padding: 30px;
+}
+.pepper-bg-gray { background-color: #eee; }
+.pepper-bg-gray h1 { color: rgb(74, 164, 180); }
+.pepper-bg-image-1 {
+	background-color: rgb(60,60,60);
+	background-image: url(../images/pepper-bg-1.jpg);	
+}
+.pepper-bg-image-2 {
+	background-color: rgb(70, 90, 40);
+	background-image: url(../images/pepper-bg-2.jpg);
+}
+.pepper-bg-image-1, .pepper-bg-image-2 {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;	
+}
+.pepper-bg-image-1, .pepper-bg-image-2 { background-size: cover; }
+.font-size-small { font-size: 0.8em; }
+.margin-bottom-15 {	margin-bottom: 15px; }
+.margin-bottom-30 {	margin-bottom: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group a {	line-height: 34px; }
+.fa { font-size: 16px; }
+.fa.login-with {
+	font-size: 30px;
+	margin: 0 5px;
+}
+.fa-medium { font-size: 20px; }
+.inline-block { display: inline-block; }
+
+
+
+
+.pepper-login {
+	background-color: rgba(13,13,13,0.25);
+	border-radius: 8px;
+	color: #fff;
+	font-weight: 300;
+	max-width: 650px;
+	padding: 0 30px 30px 30px;
+	margin: 30px auto 0 auto;
+}
+.pepper-login h1 { color: #fff; margin-bottom: 40px; }
+.pepper-login a { color: #DBDBDB; }
+.pepper-login .form-control {
+	background-color: rgba(83, 78, 78, 0.35);
+	border: 1px solid rgba(255, 255, 255, 0.27);
+	color: rgb(255,255,255);
+}
+.pepper-login .pepper-input-icon-container .fa {	color: rgb(190, 190, 190); }
+.pepper-login .control-label { margin-bottom: 10px; }
+.pepper-login .btn {	width: 100%; }
+.pepper-login .btn-social { max-width: 220px; }
+.pepper-login label { font-weight: 400; }
+.pepper-login .pepper-one-signin { border-right: 1px solid rgba(200, 200, 200, 0.5); }
+
+
+
+
+@media screen and (max-width: 767px) {
+	.pepper-header .col-md-12 {	line-height: 20px; }
+	.pepper-header .btn { margin-bottom: 15px; }
+	.pepper-container {	padding: 15px; }
+	.control-wrapper label.fa-label { top: 6px;	}
+	.pepper-header form { margin-top: 0; }
+}
+@media screen and (max-width: 991px) {
+	.pepper-login .pepper-one-signin {
+		border-right: none;
+		border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+	}
+	.pepper-login .pepper-other-signin {	padding-top: 30px; }
+	.pepper-login .form-group:last-child { margin-bottom: 30px; }
+	.pepper-create-account .col-md-6, .pepper-create-account .col-md-12 {
+		padding-top: 5px;
+		padding-bottom: 15px;
+	}
+	.pepper-create-account .form-group { margin-bottom: 0; }
+	.pepper-radio-group { margin-top: 0; }
+	.pepper-contact-form-2 .checkbox {	margin-bottom: 15px; }
+	.pepper-contact-form-2 { padding: 30px 30px 0 30px;	}
+	.pepper-radio-container { margin-left: 30px; }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+{%load staticfiles %}
+<head>
+
+	<title>Create Account</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/pepper_style.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-theme.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-social.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/font-awesome.min.css' %}"/>
+
+	<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css"> -->
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+	<!-- <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"> -->
+	<!-- <link href="css/pepper_style.css" rel="stylesheet" type="text/css">	 -->
+</head>
+<body class="pepper-bg-gray">
+    <div class="col-md-12" style="height: 100px;background: white">
+        <img src= "{% static 'mymail/pepper.jpg' %}" alt="pepper" height="50" width="50"><label style="font-size: xx-large">Mail</label>
+    </div>
+    <div class="col-md-7" style="height: 650px;margin-top: 1%;background: ivory">
+        <img id="slide" src="" width="100%" height="100%">
+    </div>
+            
+	
+            
+            <div class="col-md-5" id="signupdiv" style="margin-top: 1%;display: none">
+                <h1 class="margin-bottom-15">Create Account</h1>
+		<div class="col-md-12">	
+			<form class="form-horizontal pepper-create-account pepper-container" role="form" action="#" method="post">
+				<div class="form-inner">
+					<div class="form-group">
+			          <div class="col-md-6">		          	
+			            <label for="first_name" class="control-label">First Name</label>
+                                    <input type="text" class="form-control" id="first_name" placeholder="" required>		            		            		            
+			          </div>  
+			          <div class="col-md-6">		          	
+			            <label for="last_name" class="control-label">Last Name</label>
+                                    <input type="text" class="form-control" id="last_name" placeholder="" required>		            		            		            
+			          </div>             
+			        </div>
+			        <div class="form-group">
+			          <div class="col-md-12">		          	
+			            <label for="username" class="control-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="" required>		            		            		            
+			          </div>              
+			        </div>			
+			        <div class="form-group">
+			          <div class="col-md-6">		          	
+			            <label for="username" class="control-label">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="" required>		            		            		            
+			          </div>
+			          <div class="col-md-6 pepper-radio-group">
+                                      <label class="control-label">Gender :</label><br>
+			          	<label class="radio-inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" required> Male
+		          		</label>
+		          		<label class="radio-inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" required> Female
+		          		</label>
+			          </div>             
+			        </div>
+			        <div class="form-group">
+			          <div class="col-md-6">
+			            <label for="password" class="control-label">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="" required>
+			          </div>
+			          <div class="col-md-6">
+			            <label for="password" class="control-label">Confirm Password</label>
+                                    <input type="password" class="form-control" id="password_confirm" placeholder="" required>
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <div class="col-md-12">
+                                      <label><input type="checkbox" required> I agree to the <a href="javascript:;" data-toggle="modal" data-target="#pepper_modal">Terms of Service</a></label>
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <div class="col-md-6">
+			            <input type="submit" value="Create account" class="btn btn-info">
+			          </div>
+                                    
+			        </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" style="text-align: center">
+                                            Already have an account ?
+                                            <h4 id="click" style="cursor: pointer;color: darkslateblue">Login</h4>
+                                        </div>
+                                    </div>
+				</div>				    	
+		      </form>		      
+		</div>
+        </div>
+        <div class="col-md-5" id="logindiv" style="margin-top: 1%">
+       
+			<h1 class="margin-bottom-15">Login</h1>
+			<form class="form-horizontal pepper-container pepper-login-form-1 margin-bottom-30" role="form" action="#" method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+		            <div class="control-wrapper">
+		            	<label for="username" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+		            </div>		            	            
+		          </div>              
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+                                <input type="password" class="form-control" id="password" placeholder="Password" required>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+	             	<div class="checkbox control-wrapper">
+	                	<label>
+	                  		<input type="checkbox"> Remember me
+                		</label>
+	              	</div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          		<input type="submit" value="Log in" class="btn btn-info">
+		          		<a href="forgot-password.html" class="text-right pull-right">Forgot password?</a>
+		          	</div>
+		          </div>
+		        </div>
+		        <hr>
+		        <div class="form-group">
+                            <div class="col-md-12" style="text-align: center">
+                                    New user ?
+                                    <h4 id="clicker" style="cursor: pointer;color: darkslateblue">Create account</h4>		        		
+		        	</div>
+		        </div>
+		      </form>
+            </div>
+	
+        
+	<!-- Modal -->
+	<div class="modal fade" id="pepper_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Terms of Service</h4>
+	      </div>
+	      <div class="modal-body">
+                  <h2>Terms and Conditions</h2><br>
+                  <p>By creating account in pepper mail you accept our terms like :</p><br>
+                  <p>You not allowed to misuse your account for illegal activities.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script type="text/javascript" src="{%static 'mymail/jquery-1.11.1.min.js' %}"></script>
+	<script type="text/javascript" src="{%static 'mymail/bootstrap.min.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.flip.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.filp.min.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.min.js'%}"></script>
+        <script>
+            var images = ["{% static 'mymail/ironman1.jpg' %}","{% static 'mymail/ironman2.jpg' %}","{% static 'mymail/ironman3.jpg' %}","{% static 'mymail/ironman1.jpg' %}"];
+
+            function slideshow(options) {
+                var defaults ={
+                    fadeInSpeed:1000,
+                    fadeOutSpeed:1000,
+                    slideLength:4000
+                }
+
+               
+                var settings= $.extend({},defaults,options);
+                
+                var $slide = $('#slide');
+                
+                var slideIndex=0;
+
+                
+                nextSlide();
+
+                function nextSlide(){
+                    
+                    $slide[0].src = images[slideIndex];
+                    
+                    $slide.fadeIn(settings.fadeInSpeed,function(){
+                        setTimeout(function(){
+                            $slide.fadeOut(settings.fadeOutSpeed,nextSlide);
+                           
+                           slideIndex = ++slideIndex % images.length;
+                        },settings.slideLength); 
+                    });
+                }
+            }
+
+
+            $(function() {
+                slideshow();
+                $("#click").click(function(){
+                    $("#logindiv").slideToggle();
+                    $("#signupdiv").slideToggle();
+                });
+                $("#clicker").click(function(){
+                    $("#logindiv").slideToggle();
+                    $("#signupdiv").slideToggle();
+                });
+            });
+            
+        </script>
+</body>
+</html>
