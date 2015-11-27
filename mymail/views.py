@@ -42,6 +42,8 @@ def user_validate(request):
 	if us is not None:
 		if us.password == password:
 			return HttpResponseRedirect('/mymail/success/')
+		else:
+			return HttpResponseRedirect('/../mymail/')
 	else:
 		# return render_to_response('create_account.html', {},context_instance=RequestContext(request))
 		return HttpResponseRedirect('/../mymail/')

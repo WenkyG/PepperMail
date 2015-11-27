@@ -13,13 +13,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mymail/font-awesome.min.css' %}"/>
 </head>
 <style>
+    
     .vinboxcss:hover{
         background: black;
         color: white;
         cursor: pointer;
+        text-decoration: none;
+        /*width: 100px;*/
+
     }
     .vinboxcss:active{
-        background: red;
+        background: white;
         cursor: pointer;
     }
 </style>
@@ -30,20 +34,20 @@
     <div class="col-md-12" style="height: 700px;background: azure">
         <div class="col-md-3" style="height: 600px;background: GhostWhite z-index:999">
             <div class="col-md-12 vinboxcss" id="vinbox" style="text-align: center;margin-top: 40px" onclick="">
-                <h1>Inbox</h1>
+                <a href="#"  onclick="javascript:alert_popup();" style="text-decoration:none"><h1>Compose</h1></a>
+            </div>
+            <div class="col-md-12 vinboxcss" id="vinbox" style="text-align: center;margin-top: 40px" onclick="">
+                <a href="/mymail/success/inbox/" style="text-decoration:none"><h1>Inbox</h1></a>
             </div>
             <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
-                <h1>Sent Mail</h1>
+                <a href="/mymail/success/sentmail/" style="text-decoration:none"><h1>Sent Mail</h1></a>  
             </div>
             <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
-                <h1>Drafts</h1>
-            </div>
-            <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
-                <h1>Spam</h1>
+                <a href="/mymail/success/trash/" style="text-decoration:none"><h1>Trash</h1></a>
             </div>
         </div>
         <div class="col-md-9" style="height: 600px;background: Ivory;z-index:999;right:-15px">
-            
+            {% block col-md-9 %} {% endblock %}
         </div>
     </div>
 </body>
