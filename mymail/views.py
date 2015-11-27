@@ -27,7 +27,7 @@ def registered(request):
 		obj.save()
 		return render_to_response('registration.html', {},context_instance=RequestContext(request))
 	else:
-		html = "<html><body>Error</body></html>"
+		html = '<html><body><h1>Error UserName already exists</h1><br>click <a href="/../mymail">here</a> to Register</body></html>'
 		return HttpResponse(html)
 
 def user_validate(request):
@@ -35,8 +35,8 @@ def user_validate(request):
 	password = request.GET.get('pwd')
 	user = authenticate(user_id=userid, password=password)
 	if user is not None:
-		return HttpResponseRedirect('mymail')
+		return HttpResponseRedirect('mymail/registration/')
 	else:
-		return HttpResponseRedirect('')
+		return render_to_response('create_account.html', {},context_instance=RequestContext(request))
 
 # Create your views here.
