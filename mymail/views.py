@@ -6,8 +6,9 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template.context_processors import csrf
-from .models import user
-from django.contrib.auth import authenticate
+from mymail.models import user
+from django.contrib import auth
+from django.contrib.auth.models import User
 
 
 
@@ -33,10 +34,19 @@ def registered(request):
 def user_validate(request):
 	userid = request.GET.get('userid')
 	password = request.GET.get('pwd')
-	user = authenticate(user_id=userid, password=password)
-	if user is not None:
-		return HttpResponseRedirect('mymail/registration/')
+	try:
+		us = user.objects.get(user_id=userid)
+	except user.DoesNotExist:
+		return HttpResponseRedirect('/../mymail/')
+	print us.password
+	if us is not None:
+		if us.password == password:
+			return HttpResponseRedirect('/mymail/success/')
 	else:
-		return render_to_response('create_account.html', {},context_instance=RequestContext(request))
+		# return render_to_response('create_account.html', {},context_instance=RequestContext(request))
+		return HttpResponseRedirect('/../mymail/')
+
+def success_login(request):
+	return render(request,'success.html')
 
 # Create your views here.

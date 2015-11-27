@@ -1,0 +1,50 @@
+{%load staticfiles %}
+<head>
+	
+	<title>Mail</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/pepper_style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-theme.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-social.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'mymail/font-awesome.min.css' %}"/>
+</head>
+<style>
+    .vinboxcss:hover{
+        background: black;
+        color: white;
+        cursor: pointer;
+    }
+    .vinboxcss:active{
+        background: red;
+        cursor: pointer;
+    }
+</style>
+<body class="pepper-bg-gray">
+    <div class="col-md-12" style="height: 100px;background: white">
+        <img src="{% static 'mymail/pepper.jpg' %}" alt="pepper" height="50" width="50"><label style="font-size: xx-large">Mail</label>
+    </div>
+    <div class="col-md-12" style="height: 700px;background: azure">
+        <div class="col-md-3" style="height: 600px;background: GhostWhite z-index:999">
+            <div class="col-md-12 vinboxcss" id="vinbox" style="text-align: center;margin-top: 40px" onclick="">
+                <h1>Inbox</h1>
+            </div>
+            <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
+                <h1>Sent Mail</h1>
+            </div>
+            <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
+                <h1>Drafts</h1>
+            </div>
+            <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
+                <h1>Spam</h1>
+            </div>
+        </div>
+        <div class="col-md-9" style="height: 600px;background: Ivory;z-index:999;right:-15px">
+            
+        </div>
+    </div>
+</body>
+</html>
