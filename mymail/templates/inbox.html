@@ -2,7 +2,13 @@
 
 {% block col-md-9 %}
 
-
-<h1>HELLO WORLD</h1>
-
+<html>
+<body>
+{% for i in u %}
+	<div>
+<h2>{{i.user_id}}</h2>
+</div>
+{% endfor %}
+</body>
+</html>
  {% endblock %}

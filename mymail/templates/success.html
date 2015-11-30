@@ -11,7 +11,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-social.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'mymail/font-awesome.min.css' %}"/>
+    <script type="text/javascript" src="{%static 'mymail/jquery-1.11.1.min.js' %}"></script>
+    <script type="text/javascript" src="{%static 'mymail/bootstrap.min.js'%}"></script>
 </head>
+<script>
+// function popitup(url) {
+//     newwindow=window.open(url,name,'height=500,width=500,status=no,menubar=0,scrollbars=0,addressbar=0,resizable =0');
+//     if (window.focus) {newwindow.focus()}
+//     return false;
+// }
+// </script>
 <style>
     
     .vinboxcss:hover{
@@ -32,23 +41,38 @@
         <img src="{% static 'mymail/pepper.jpg' %}" alt="pepper" height="50" width="50"><label style="font-size: xx-large">Mail</label>
     </div>
     <div class="col-md-12" style="height: 700px;background: azure">
-        <div class="col-md-3" style="height: 600px;background: GhostWhite z-index:999">
+        <div class="col-md-3" style="height: 600px;background: GhostWhite">
             <div class="col-md-12 vinboxcss" id="vinbox" style="text-align: center;margin-top: 40px" onclick="">
-                <a href="#"  onclick="javascript:alert_popup();" style="text-decoration:none"><h1>Compose</h1></a>
+                <!-- <a href="#"  onclick="popupCenter()" style="text-decoration:none"><h2>Compose</h2></a> -->
+                <a href="#" onclick="return popitup('/mymail/success/new_mail')" style="text-decoration:none"
+    ><h2>Compose</h2></a>
             </div>
-            <div class="col-md-12 vinboxcss" id="vinbox" style="text-align: center;margin-top: 40px" onclick="">
-                <a href="/mymail/success/inbox/" style="text-decoration:none"><h1>Inbox</h1></a>
+            <div class="col-md-12 vinboxcss" id="vinbox2" style="text-align: center;margin-top: 40px" onclick="">
+                <a href="/mymail/success/inbox/" style="text-decoration:none"><h2>Inbox</h2></a>
             </div>
             <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
-                <a href="/mymail/success/sentmail/" style="text-decoration:none"><h1>Sent Mail</h1></a>  
+                <a href="/mymail/success/sentmail/" style="text-decoration:none"><h2>Sent Mail</h2></a>  
             </div>
             <div class="col-md-12 vinboxcss" style="text-align: center;margin-top: 20px;cursor: pointer" onclick="">
-                <a href="/mymail/success/trash/" style="text-decoration:none"><h1>Trash</h1></a>
+                <a href="/mymail/success/trash/" style="text-decoration:none"><h2>Trash</h2></a>
             </div>
         </div>
-        <div class="col-md-9" style="height: 600px;background: Ivory;z-index:999;right:-15px">
+        <!-- <div class="col-"></div> -->
+        <div class="col-md-4" id="newmail" style="margin-left:65%;display:none;position:fixed;z-index:999;height:600px;border-width:2px;border-style:solid">
+            </div>
+        <div class="col-md-9" style="height: 600px;background: Ivory;right:-15px">
             {% block col-md-9 %} {% endblock %}
         </div>
     </div>
 </body>
+
+<script>
+$(function(){
+$("#vinbox").click(function(){
+    $("#newmail").slideToggle();
+    $("#newmail").load("/mymail/success/new_mail");
+});
+
+});
+</script>
 </html>

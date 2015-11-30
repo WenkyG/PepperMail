@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{%load staticfiles %}
+<head>
+
+	<title>Create Account</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/pepper_style.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-theme.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap-social.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'mymail/font-awesome.min.css' %}"/>
+
+	<script type="text/javascript" src="{%static 'mymail/jquery-1.11.1.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'mymail/bootstrap.min.js'%}"></script>
+</head>
+<body class="pepper-bg-gray">
+    <div class="col-md-12" style="background:teal;width:445px;left:-15px">
+    	<label style="float:left">Compose</label>
+    	<button class="btn btn-danger" id="close-newmail" style="float:right;right:-10px" onclick="javascript:;">X</button>
+    </div>
+        <div class="col-md-12" id="signupdiv" style="margin-top: 1%;">
+    	<form class="form-horizontal pepper-create-account" role="form" action="registration" method="GET">{% csrf_token %}
+    		<div class="form-inner">
+					<div class="form-group">
+			          <div class="col-md-12" style="width:475px;left:-30px">		          	
+			            <!-- <label for="address" class="control-label">TO</label> -->
+                                    <input type="text" name = "to" class="form-control" id="address" placeholder="To" required>		            		            		            
+			          </div>  
+			          <div class="col-md-12" style="width:475px;left:-30px">		          	
+			            <!-- <label for="subject" class="control-label">Subject</label> -->
+                                    <input type="text" name= "subject" class="form-control" id="subject" placeholder="Subject" required>		            		            		            
+			          </div> 
+			          <div class="col-md-12" style="width:475px;left:-30px">		          	
+			            <!-- <label for="messege_text" class="control-label">Your messege here</label> -->
+                                    <textarea rows="16" style="resize:none" name= "content" class="form-control" id="messege_text" placeholder="Your message here ... " required></textarea>	            		            		            
+			          </div>  
+			          <div class="col-md-6"></div>
+			          <div class="col-md-6">
+			          	<div class="col-md-12">
+			          		<input type="submit" class="btn btn-success col-md-12" value="Send"/>
+			          	</div>
+
+			          </div>           
+			        </div>
+			      </div>
+
+    	</form>
+    </div>
+    <script>
+$(function(){	
+ $("#close-newmail").click(function(){
+window.parent.$("success/sentmail/#newmail").hide();
+});
+});
+
+       </body>
+</html>

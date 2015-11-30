@@ -50,5 +50,13 @@ def user_validate(request):
 
 def success_login(request):
 	return render(request,'success.html')
-
+def new_mail(request):
+	return render(request,'new_mail.html')
+def inbox_mail(request):
+	u = user.objects.all()
+	return render_to_response('inbox.html',{'u':u})
+def sent_mail(request):
+	return render(request,'sent.html')
+def trash_mail(request):
+	return render(request,'trash.html')
 # Create your views here.
