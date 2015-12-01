@@ -53,26 +53,33 @@ def success_login(request):
 	return render(request,'success.html')
 def new_mail(request):
 		return render(request,'new_mail.html')
-def sending(request):
+def sending(request,p):
 	sent_from = request.session["user_id"]
 	sent_to = request.POST.get('to')
 	subj = request.POST.get('subject')
 	content = request.POST.get('content')
 	try:
 		use = user.objects.get(user_id=sent_to)
-		print use, sent_to, sent_from, subj, content
+		# print use, sent_to, sent_from, subj, content
 	except user.DoesNotExist:
 		return HttpResponseRedirect('../new_mail')
 	if use is not None:
-		m = mailing(sender=user.objects.get(user_id=sent_from).user_id,receiver=user.objects.get(user_id=sent_to).user_id,subject=subj,messege=content)
-		print m
+		m = mailing(sender=user.objects.get(user_id=sent_from),receiver=user.objects.get(user_id=sent_to),subject=subj,messege=content)
+		# print m
 		m.save()
-		return HttpResponseRedirect('../')
+		# str1 = "/mymail/success/" + p
+		return HttpResponseRedirect('/mymail/success/'+p+'/')
 def inbox_mail(request):
-	u = user.objects.all()
+	i = user.objects.get(user_id=request.session["user_id"])
+	# print i.id
+	u = mailing.objects.filter(receiver_id=i.id)
 	return render_to_response('inbox.html',{'u':u})
 def sent_mail(request):
-	return render(request,'sent.html')
+	i = user.objects.get(user_id=request.session["user_id"])
+	print i.id
+	u = mailing.objects.filter(sender_id=i.id)
+	return render_to_response('sent.html',{'u':u})
+
 def trash_mail(request):
 	return render(request,'trash.html')
 # Create your views here.

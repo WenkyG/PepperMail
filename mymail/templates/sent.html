@@ -3,6 +3,18 @@
 {% block col-md-9 %}
 
 
-<h1>HELLO WORLD</h1>
+<html>
+<body>
+{% for i in u %}
+	<a href="#" style:"text-decoration: none !important;"><div>
+<h4>{{i.subject|truncatewords:"5"}}</h4>
+<!-- <h6>{{i.messege|truncatewords:"10"}}</h6> -->
+hello
+</div>
+</a>
+<hr>
+{% endfor %}
+</body>
+</html>
 
  {% endblock %}

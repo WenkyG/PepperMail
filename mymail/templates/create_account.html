@@ -98,7 +98,7 @@
         <div class="col-md-5" id="logindiv" style="margin-top: 1%">
        
 			<h1 class="margin-bottom-15">Login</h1>
-			<form class="form-horizontal pepper-container pepper-login-form-1 margin-bottom-30" role="form" action="validate/" method="POST">{% csrf_token %}
+			<form class="form-horizontal pepper-container pepper-login-form-1 margin-bottom-30" role="form" action="success/inbox/" method="POST">{% csrf_token %}
 		        <div class="form-group">
 		          <div class="col-xs-12">		            
 		            <div class="control-wrapper">
@@ -165,7 +165,7 @@
 	<script type="text/javascript" src="{%static 'mymail/jquery-1.11.1.min.js' %}"></script>
 	<script type="text/javascript" src="{%static 'mymail/bootstrap.min.js'%}"></script>
         <script type="text/javascript" src="{%static 'mymail/jquery.flip.js'%}"></script>
-        <script type="text/javascript" src="{%static 'mymail/jquery.filp.min.js'%}"></script>
+        <script type="text/javascript" src="{%static 'mymail/jquery.flip.min.js'%}"></script>
         <script type="text/javascript" src="{%static 'mymail/jquery.min.js'%}"></script>
         <script>
             var images = ["{% static 'mymail/ironman1.jpg' %}","{% static 'mymail/ironman2.jpg' %}","{% static 'mymail/ironman3.jpg' %}","{% static 'mymail/ironman1.jpg' %}"];

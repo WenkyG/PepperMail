@@ -6,7 +6,11 @@
 <body>
 {% for i in u %}
 	<div>
-<h2>{{i.user_id}}</h2>
+
+<h4>{{i.subject|truncatewords:"5"}}</h4>
+<h6>{{i.messege|truncatewords:"10"}}</h6>
+
+<hr>
 </div>
 {% endfor %}
 </body>

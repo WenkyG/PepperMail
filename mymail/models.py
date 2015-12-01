@@ -14,3 +14,6 @@ class mailing(models.Model):
 	receiver = models.ForeignKey(user,related_name='receive')
 	subject = models.CharField(max_length = 100)
 	messege = models.CharField(max_length = 1000)
+
+	def __unicode__(self):
+		return self.subject
