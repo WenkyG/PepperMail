@@ -1,5 +1,5 @@
 # PepperMail
-mailing app
+_mailing web app_
 
 Visit the wiki page to know more.
 
