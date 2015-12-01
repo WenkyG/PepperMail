@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template.context_processors import csrf
-from mymail.models import user
+from mymail.models import user, mailing
 from django.contrib import auth
 from django.contrib.auth.models import User
 
@@ -16,12 +16,12 @@ def home(request):
 	return render(request, 'create_account.html')
 
 def registered(request):
-	f_name = request.GET.get('f_name')
-	l_name =  request.GET.get('l_name')
-	mail = request.GET.get('mail')
-	userid = request.GET.get('user_name')
-	gender = request.GET.get('optionsRadios')
-	password = request.GET.get('password')
+	f_name = request.POST.get('f_name')
+	l_name =  request.POST.get('l_name')
+	mail = request.POST.get('mail')
+	userid = request.POST.get('user_name')
+	gender = request.POST.get('optionsRadios')
+	password = request.POST.get('password')
 
 	if not user.objects.filter(user_id = userid):
 		obj = user(first_name = f_name,last_name=l_name,email=mail,user_id=userid,gender=gender,password=password)
@@ -32,16 +32,17 @@ def registered(request):
 		return HttpResponse(html)
 
 def user_validate(request):
-	userid = request.GET.get('userid')
-	password = request.GET.get('pwd')
+	userid = request.POST.get('userid')
+	password = request.POST.get('pwd')
 	try:
 		us = user.objects.get(user_id=userid)
 	except user.DoesNotExist:
 		return HttpResponseRedirect('/../mymail/')
-	print us.password
+	# print us.password
 	if us is not None:
 		if us.password == password:
-			return HttpResponseRedirect('/mymail/success/')
+			request.session["user_id"] = userid 
+			return render_to_response('success.html',{'user_name':request.session["user_id"]})
 		else:
 			return HttpResponseRedirect('/../mymail/')
 	else:
@@ -51,7 +52,22 @@ def user_validate(request):
 def success_login(request):
 	return render(request,'success.html')
 def new_mail(request):
-	return render(request,'new_mail.html')
+		return render(request,'new_mail.html')
+def sending(request):
+	sent_from = request.session["user_id"]
+	sent_to = request.POST.get('to')
+	subj = request.POST.get('subject')
+	content = request.POST.get('content')
+	try:
+		use = user.objects.get(user_id=sent_to)
+		print use, sent_to, sent_from, subj, content
+	except user.DoesNotExist:
+		return HttpResponseRedirect('../new_mail')
+	if use is not None:
+		m = mailing(sender=user.objects.get(user_id=sent_from).user_id,receiver=user.objects.get(user_id=sent_to).user_id,subject=subj,messege=content)
+		print m
+		m.save()
+		return HttpResponseRedirect('../')
 def inbox_mail(request):
 	u = user.objects.all()
 	return render_to_response('inbox.html',{'u':u})

@@ -9,4 +9,8 @@ class user(models.Model):
 	user_id = models.CharField(max_length=20)
 	gender = models.CharField(max_length = 10)
 	password = models.CharField(max_length = 50)
-# Create your models here.
+class mailing(models.Model):
+	sender = models.ForeignKey(user,related_name='send')
+	receiver = models.ForeignKey(user,related_name='receive')
+	subject = models.CharField(max_length = 100)
+	messege = models.CharField(max_length = 1000)
