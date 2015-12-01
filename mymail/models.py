@@ -15,5 +15,5 @@ class mailing(models.Model):
 	subject = models.CharField(max_length = 100)
 	messege = models.CharField(max_length = 1000)
 
-	def __unicode__(self):
-		return self.subject
+class trash(models.Model):
+	messege = models.ForeignKey(mailing,related_name='msg')

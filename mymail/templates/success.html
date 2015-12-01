@@ -38,7 +38,23 @@
 </style>
 <body class="pepper-bg-gray">
     <div class="col-md-12" style="height: 100px;background: white">
+        <div class="col-md-6">
         <img src="{% static 'mymail/pepper.jpg' %}" alt="pepper" height="50" width="50"><label style="font-size: xx-large">Mail</label>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4" style="margin-left:60%">
+            <div class="col-md-12" id="username-top">Name
+            </div>
+            <div class="col-md-12" id="logout" style="display:none">
+                logout
+            </div>
+        </div>
+        </div>
+    </div>
     </div>
     <div class ="col-md-12" style="margin-top:3px">
         <a href="#">{{user_name}}</a>
@@ -73,6 +89,9 @@ $(function(){
 $("#vinbox").click(function(){
     $("#newmail").slideToggle();
     $("#newmail").load("/mymail/success/new_mail");
+});
+$("#username-top").click(function(){
+    $("#logout").slideToggle();
 });
 
 });

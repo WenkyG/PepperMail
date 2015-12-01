@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template.context_processors import csrf
-from mymail.models import user, mailing
+from mymail.models import user, mailing, trash
 from django.contrib import auth
 from django.contrib.auth.models import User
 
@@ -38,15 +38,15 @@ def user_validate(request):
 		us = user.objects.get(user_id=userid)
 	except user.DoesNotExist:
 		return HttpResponseRedirect('/../mymail/')
-	# print us.password
 	if us is not None:
 		if us.password == password:
 			request.session["user_id"] = userid 
-			return render_to_response('success.html',{'user_name':request.session["user_id"]})
+			i = user.objects.get(user_id=request.session["user_id"])
+			u = mailing.objects.filter(receiver_id=i.id)
+			return render_to_response('inbox.html',{'user_name':request.session["user_id"],'u':u})
 		else:
 			return HttpResponseRedirect('/../mymail/')
 	else:
-		# return render_to_response('create_account.html', {},context_instance=RequestContext(request))
 		return HttpResponseRedirect('/../mymail/')
 
 def success_login(request):
@@ -60,26 +60,33 @@ def sending(request,p):
 	content = request.POST.get('content')
 	try:
 		use = user.objects.get(user_id=sent_to)
-		# print use, sent_to, sent_from, subj, content
 	except user.DoesNotExist:
 		return HttpResponseRedirect('../new_mail')
 	if use is not None:
 		m = mailing(sender=user.objects.get(user_id=sent_from),receiver=user.objects.get(user_id=sent_to),subject=subj,messege=content)
-		# print m
 		m.save()
-		# str1 = "/mymail/success/" + p
 		return HttpResponseRedirect('/mymail/success/'+p+'/')
 def inbox_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
-	# print i.id
 	u = mailing.objects.filter(receiver_id=i.id)
 	return render_to_response('inbox.html',{'u':u})
 def sent_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
-	print i.id
 	u = mailing.objects.filter(sender_id=i.id)
 	return render_to_response('sent.html',{'u':u})
 
 def trash_mail(request):
+
 	return render(request,'trash.html')
-# Create your views here.
+def displaying(request, mail_id):
+	msg = mailing.objects.get(id=mail_id)
+	print msg.messege
+	return render_to_response('display.html',{'msg':msg})
+def trashing(request,mail_id):
+	i = mailing.objects.get(id=mail_id)
+	o = trash(messege=i)
+	print o.messege.messege
+	o.save()
+	print 'saved'
+	i.delete()
+	return HttpResponseRedirect('../../')
