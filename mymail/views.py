@@ -84,9 +84,13 @@ def displaying(request, mail_id):
 	return render_to_response('display.html',{'msg':msg})
 def trashing(request,mail_id):
 	i = mailing.objects.get(id=mail_id)
-	o = trash(messege=i)
+	print i.id
+	o = trash(messege_id=i.id)
 	print o.messege.messege
 	o.save()
 	print 'saved'
 	i.delete()
 	return HttpResponseRedirect('../../')
+def logout(request):
+	del request.session["user_id"]
+	return HttpResponseRedirect('/mymail/')

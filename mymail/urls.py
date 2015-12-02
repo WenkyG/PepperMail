@@ -18,4 +18,5 @@ urlpatterns = [
 		url(r'^success/(sentmail|inbox|trash)/(?P<mail_id>\d+)/$', 'mymail.views.displaying'),
 		url(r'^validate/inbox/del/(?P<mail_id>\d+)/$', 'mymail.views.displaying'),
 		url(r'^success/(sentmail|inbox)/del/(?P<mail_id>\d+)/$', 'mymail.views.trashing'),
+		url(r'^logout', 'mymail.views.logout'),
 ]
