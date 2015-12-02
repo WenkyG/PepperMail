@@ -74,21 +74,28 @@ def sent_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
 	u = mailing.objects.filter(sender_id=i.id)
 	return render_to_response('sent.html',{'u':u})
-
+	
 def trash_mail(request):
-
-	return render(request,'trash.html')
+	i = trash.objects.filter(sender=request.session["user_id"],receiver=request.session["user_id"])
+	return render_to_response('trash.html',{'u':i})
 def displaying(request, mail_id):
 	msg = mailing.objects.get(id=mail_id)
 	print msg.messege
 	return render_to_response('display.html',{'msg':msg})
+def displaying_trash(request, mail_id):
+	msg = trash.objects.get(m_id=mail_id)
+	# print msg.messege
+	return render_to_response('display.html',{'msg':msg})
 def trashing(request,mail_id):
 	i = mailing.objects.get(id=mail_id)
-	print i.id
-	o = trash(messege_id=i.id)
-	print o.messege.messege
-	o.save()
-	print 'saved'
+	if not trash.objects.filter(m_id = i.id):
+		o = trash(m_id=i.id,sender=user.objects.get(id=i.sender_id).user_id,receiver=user.objects.get(id=i.receiver_id).user_id,messege=i.messege,subject=i.subject)
+		o.save()
+	i.delete()
+	return HttpResponseRedirect('../../')
+def trash_ing(request,mail_id):
+	print mail_id
+	i = trash.objects.get(m_id=mail_id)
 	i.delete()
 	return HttpResponseRedirect('../../')
 def logout(request):

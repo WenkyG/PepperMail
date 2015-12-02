@@ -9,6 +9,7 @@ class user(models.Model):
 	user_id = models.CharField(max_length=20)
 	gender = models.CharField(max_length = 10)
 	password = models.CharField(max_length = 50)
+
 class mailing(models.Model):
 	sender = models.ForeignKey(user,related_name='send')
 	receiver = models.ForeignKey(user,related_name='receive')
@@ -16,4 +17,8 @@ class mailing(models.Model):
 	messege = models.CharField(max_length = 1000)
 
 class trash(models.Model):
-	messege = models.ForeignKey(mailing,related_name='msg')
+	m_id = models.IntegerField(default=0)
+	sender = models.CharField(max_length = 20,default='mail')
+	receiver = models.CharField(max_length = 20, default='mail')
+	subject = models.CharField(max_length = 100,default='mail')
+	messege = models.CharField(max_length = 1000,default='mail')

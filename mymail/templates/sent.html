@@ -1,21 +1,19 @@
 {% extends "success.html" %}
+{%load staticfiles %}
+
 
 {% block col-md-9 %}
 
-
 <html>
-<head>
-	</head>
 <body>
 {% for i in u reversed %}
-    <a href="{{i.id}}" style="text-decoration:none;">
-    <div>
-        <h4>{{i.subject|truncatewords:"5"}}</h4>
-        <h6>{{i.messege|truncatewords:"10"}}</h6>
-    </div></a><a href="#"><div>Delete</div></a>
+	<a href="{{i.id}}/" style="text-decoration:none;">
+	<div>
+		<h4>{{i.subject|truncatewords:"5"}}</h4>
+		<h6>{{i.messege|truncatewords:"10"}}</h6>
+	</div></a><a href="del/{{i.id}}/"><div style="float:right;margin-top:-10px">Delete<img src="{% static 'mymail/trash.jpg' %}" width="20" height="20"/></div></a>
 <hr>
 {% endfor %}
 </body>
 </html>
-
  {% endblock %}

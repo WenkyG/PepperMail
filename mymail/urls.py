@@ -15,8 +15,10 @@ urlpatterns = [
 		url(r'^validate/(inbox)/sent_success/$', 'mymail.views.sending'),
 		url(r'^success/(inbox|sentmail|trash|)/sent_success/$', 'mymail.views.sending'),
 		url(r'^validate/inbox/(?P<mail_id>\d+)/$', 'mymail.views.displaying'),
-		url(r'^success/(sentmail|inbox|trash)/(?P<mail_id>\d+)/$', 'mymail.views.displaying'),
+		url(r'^success/(sentmail|inbox)/(?P<mail_id>\d+)/$', 'mymail.views.displaying'),
+		url(r'^success/trash/(?P<mail_id>\d+)/$', 'mymail.views.displaying_trash'),
 		url(r'^validate/inbox/del/(?P<mail_id>\d+)/$', 'mymail.views.displaying'),
 		url(r'^success/(sentmail|inbox)/del/(?P<mail_id>\d+)/$', 'mymail.views.trashing'),
+		url(r'^success/trash/del/(?P<mail_id>\d+)/$', 'mymail.views.trash_ing'),
 		url(r'^logout', 'mymail.views.logout'),
 ]
