@@ -6,9 +6,10 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template.context_processors import csrf
-from mymail.models import user, mailing, trash
+from mymail.models import user, mailing, trash, sent_mai
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 
@@ -41,9 +42,10 @@ def user_validate(request):
 	if us is not None:
 		if us.password == password:
 			request.session["user_id"] = userid 
+			print request.session["user_id"]
 			i = user.objects.get(user_id=request.session["user_id"])
 			u = mailing.objects.filter(receiver_id=i.id)
-			return render_to_response('inbox.html',{'user_name':request.session["user_id"],'u':u})
+			return render(request,'inbox.html',{'u':u})
 		else:
 			return HttpResponseRedirect('/../mymail/')
 	else:
@@ -64,7 +66,9 @@ def sending(request,p):
 		return HttpResponseRedirect('../new_mail')
 	if use is not None:
 		m = mailing(sender=user.objects.get(user_id=sent_from),receiver=user.objects.get(user_id=sent_to),subject=subj,messege=content)
+		n = sent_mai(sende=user.objects.get(user_id=sent_from),receive=user.objects.get(user_id=sent_to),subject=subj,messege=content)
 		m.save()
+		n.save()
 		return HttpResponseRedirect('/mymail/success/'+p+'/')
 def inbox_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
@@ -72,32 +76,42 @@ def inbox_mail(request):
 	return render_to_response('inbox.html',{'u':u})
 def sent_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
-	u = mailing.objects.filter(sender_id=i.id)
-	return render_to_response('sent.html',{'u':u})
+	u = sent_mai.objects.filter(sende_id=i.id)
+	return render(request,'sent.html',{'u':u})
 	
 def trash_mail(request):
-	i = trash.objects.filter(sender=request.session["user_id"],receiver=request.session["user_id"])
+	i = trash.objects.filter(Q(sender=request.session["user_id"]) | Q(receiver=request.session["user_id"]))
 	return render_to_response('trash.html',{'u':i})
-def displaying(request, mail_id):
-	msg = mailing.objects.get(id=mail_id)
-	print msg.messege
-	return render_to_response('display.html',{'msg':msg})
-def displaying_trash(request, mail_id):
-	msg = trash.objects.get(m_id=mail_id)
-	# print msg.messege
-	return render_to_response('display.html',{'msg':msg})
-def trashing(request,mail_id):
-	i = mailing.objects.get(id=mail_id)
-	if not trash.objects.filter(m_id = i.id):
-		o = trash(m_id=i.id,sender=user.objects.get(id=i.sender_id).user_id,receiver=user.objects.get(id=i.receiver_id).user_id,messege=i.messege,subject=i.subject)
-		o.save()
-	i.delete()
-	return HttpResponseRedirect('../../')
-def trash_ing(request,mail_id):
-	print mail_id
-	i = trash.objects.get(m_id=mail_id)
-	i.delete()
-	return HttpResponseRedirect('../../')
+def displaying(request, box,mail_id):
+	if box == 'inbox':
+		msg = mailing.objects.get(id=mail_id)
+		return render_to_response('display.html',{'msg':msg})
+	elif box == 'sentmail':
+		ms = sent_mai.objects.get(id=mail_id)
+		return render_to_response('display.html',{'msg':ms})
+	elif box == 'trash':
+		msgg = trash.objects.get(m_id=mail_id)
+		return render_to_response('display.html',{'msg':msgg})
+
 def logout(request):
 	del request.session["user_id"]
 	return HttpResponseRedirect('/mymail/')
+def trashing(request,box,mail_id):
+	if box == 'inbox':
+		i = mailing.objects.get(id=mail_id)
+		if not trash.objects.filter(m_id = i.id):
+			o = trash(m_id=i.id,sender=user.objects.get(id=i.sender_id).user_id,receiver=user.objects.get(id=i.receiver_id).user_id,messege=i.messege,subject=i.subject)
+			o.save()
+		i.delete()
+		return HttpResponseRedirect('../../')
+	elif box == 'sentmail':
+		i = sent_mai.objects.get(id=mail_id)
+		if not trash.objects.filter(m_id = i.id):
+			o = trash(m_id=i.id,sender=user.objects.get(id=i.sende_id).user_id,receiver=user.objects.get(id=i.receive_id).user_id,messege=i.messege,subject=i.subject)
+			o.save()
+		i.delete()
+		return HttpResponseRedirect('../../')
+	elif box =='trash':
+		i = trash.objects.get(m_id=mail_id)
+		i.delete()
+		return HttpResponseRedirect('../../')

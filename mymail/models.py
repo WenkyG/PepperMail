@@ -16,6 +16,12 @@ class mailing(models.Model):
 	subject = models.CharField(max_length = 100)
 	messege = models.CharField(max_length = 1000)
 
+class sent_mai(models.Model):
+	sende = models.ForeignKey(user,related_name='sendr')
+	receive = models.ForeignKey(user,related_name='receiver')
+	subject = models.CharField(max_length = 100)
+	messege = models.CharField(max_length = 1000)
+
 class trash(models.Model):
 	m_id = models.IntegerField(default=0)
 	sender = models.CharField(max_length = 20,default='mail')
