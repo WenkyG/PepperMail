@@ -15,6 +15,7 @@ class mailing(models.Model):
 	receiver = models.ForeignKey(user,related_name='receive')
 	subject = models.CharField(max_length = 100)
 	messege = models.CharField(max_length = 1000)
+	visited = models.BooleanField(default=False)
 
 class sent_mai(models.Model):
 	sende = models.ForeignKey(user,related_name='sendr')

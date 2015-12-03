@@ -10,12 +10,21 @@
 <body>
 	<!-- <h1>{{request.session.user_id}}</h1> -->
 {% for i in u reversed %}
+	{% if i.visited == False %}
 	<a href="{{i.id}}/" style="text-decoration:none;">
 	<div>
 		<h4>{{i.subject|truncatewords:"5"}}</h4>
 		<h6>{{i.messege|truncatewords:"10"}}</h6>
 	</div></a><a href="del/{{i.id}}/"><div style="float:right;margin-top:-10px">Delete<img src="{% static 'mymail/trash.jpg' %}" width="20" height="20"/></div></a>
 <hr>
+{% else %}
+<a href="{{i.id}}/" style="text-decoration:none;">
+	<div style="background: beige ;">
+		<h4>{{i.subject|truncatewords:"5"}}</h4>
+		<h6>{{i.messege|truncatewords:"10"}}</h6>
+	</div></a><a href="del/{{i.id}}/"><div style="float:right;margin-top:-10px">Delete<img src="{% static 'mymail/trash.jpg' %}" width="20" height="20"/></div></a>
+<hr>
+	{%endif%}
 {% endfor %}
 </body>
 </html>

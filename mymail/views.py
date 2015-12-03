@@ -85,6 +85,10 @@ def trash_mail(request):
 def displaying(request, box,mail_id):
 	if box == 'inbox':
 		msg = mailing.objects.get(id=mail_id)
+		msg.visited=True
+		msg.save()
+		# msg.save(update_fields=['visited'])
+		msg = mailing.objects.get(id=mail_id)
 		return render(request,'display.html',{'msg':msg})
 	elif box == 'sentmail':
 		ms = sent_mai.objects.get(id=mail_id)
