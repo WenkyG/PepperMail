@@ -45,7 +45,7 @@ def user_validate(request):
 			print request.session["user_id"]
 			i = user.objects.get(user_id=request.session["user_id"])
 			u = mailing.objects.filter(receiver_id=i.id)
-			return render(request,'inbox.html',{'u':u})
+			return HttpResponseRedirect('/../mymail/success/inbox/')
 		else:
 			return HttpResponseRedirect('/../mymail/')
 	else:
@@ -73,7 +73,7 @@ def sending(request,p):
 def inbox_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
 	u = mailing.objects.filter(receiver_id=i.id)
-	return render_to_response('inbox.html',{'u':u})
+	return render(request,'inbox.html',{'u':u})
 def sent_mail(request):
 	i = user.objects.get(user_id=request.session["user_id"])
 	u = sent_mai.objects.filter(sende_id=i.id)
@@ -81,17 +81,17 @@ def sent_mail(request):
 	
 def trash_mail(request):
 	i = trash.objects.filter(Q(sender=request.session["user_id"]) | Q(receiver=request.session["user_id"]))
-	return render_to_response('trash.html',{'u':i})
+	return render(request,'trash.html',{'u':i})
 def displaying(request, box,mail_id):
 	if box == 'inbox':
 		msg = mailing.objects.get(id=mail_id)
-		return render_to_response('display.html',{'msg':msg})
+		return render(request,'display.html',{'msg':msg})
 	elif box == 'sentmail':
 		ms = sent_mai.objects.get(id=mail_id)
-		return render_to_response('display.html',{'msg':ms})
+		return render(request,'display.html',{'msg':ms})
 	elif box == 'trash':
 		msgg = trash.objects.get(m_id=mail_id)
-		return render_to_response('display.html',{'msg':msgg})
+		return render(request,'display.html',{'msg':msgg})
 
 def logout(request):
 	del request.session["user_id"]
