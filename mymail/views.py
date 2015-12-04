@@ -4,12 +4,14 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
+from django.core.context_processors import csrf
 from django.views import generic
 from django.template.context_processors import csrf
 from mymail.models import user, mailing, trash, sent_mai
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -24,7 +26,7 @@ def registered(request):
 	gender = request.POST.get('optionsRadios')
 	password = request.POST.get('password')
 
-	if not user.objects.filter(user_id = userid):
+	if not user.objects.filter(Q(user_id=userid) | Q(email=mail)):
 		obj = user(first_name = f_name,last_name=l_name,email=mail,user_id=userid,gender=gender,password=password)
 		obj.save()
 		return render_to_response('registration.html', {},context_instance=RequestContext(request))
@@ -87,7 +89,6 @@ def displaying(request, box,mail_id):
 		msg = mailing.objects.get(id=mail_id)
 		msg.visited=True
 		msg.save()
-		# msg.save(update_fields=['visited'])
 		msg = mailing.objects.get(id=mail_id)
 		return render(request,'display.html',{'msg':msg})
 	elif box == 'sentmail':
@@ -119,3 +120,18 @@ def trashing(request,box,mail_id):
 		i = trash.objects.get(m_id=mail_id)
 		i.delete()
 		return HttpResponseRedirect('../../')
+@csrf_exempt
+def check(request):
+	userid = request.POST.get('userid')
+	if not user.objects.filter(user_id = userid):
+		return HttpResponse('0')
+	else:
+		return HttpResponse('1')
+
+@csrf_exempt
+def checki(request):
+	mail = request.POST.get('email')
+	if not user.objects.filter(email = mail):
+		return HttpResponse('0')
+	else:
+		return HttpResponse('1')

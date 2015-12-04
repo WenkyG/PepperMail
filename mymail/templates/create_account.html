@@ -31,16 +31,16 @@
             <div class="col-md-5" id="signupdiv" style="margin-top: 1%;display: none">
                 <h1 class="margin-bottom-15">Create Account</h1>
 		<div class="col-md-12">	
-			<form class="form-horizontal pepper-create-account pepper-container" role="form" action="registration" method="POST">{% csrf_token %}
+			<form class="form-horizontal pepper-create-account pepper-container" id="signup" role="form" action="registration/" method="POST">{% csrf_token %}
 				<div class="form-inner">
 					<div class="form-group">
 			          <div class="col-md-6">		          	
 			            <label for="first_name" class="control-label">First Name</label>
-                                    <input type="text" name = "f_name" class="form-control" id="first_name" placeholder="" required>		            		            		            
+                                    <input type="text" name = "f_name" pattern="^[a-zA-Z]{2,}" class="form-control" id="first_name" placeholder="" required>		            		            		            
 			          </div>  
 			          <div class="col-md-6">		          	
 			            <label for="last_name" class="control-label">Last Name</label>
-                                    <input type="text" name= "l_name" class="form-control" id="last_name" placeholder="" required>		            		            		            
+                                    <input type="text" name= "l_name" pattern="^[a-zA-Z]{2,}" class="form-control" id="last_name" placeholder="" required>		            		            		            
 			          </div>             
 			        </div>
 			        <div class="form-group">
@@ -51,10 +51,10 @@
 			        </div>			
 			        <div class="form-group">
 			          <div class="col-md-6">		          	
-			            <label for="username" class="control-label">Username</label>
-                                    <input type="text" name="user_name" class="form-control" id="username" placeholder="" required>		            		            		            
+			            <label for="username" id="tik" class="control-label">Username</label>
+                                    <input type="text" name="user_name" pattern="^[a-zA-Z0-9_]{3,}"class="form-control" id="username" placeholder="" required>		            		            		            
 			          </div>
-			          <div class="col-md-6 pepper-radio-group">
+			          <div class="col-md-6 pepper-radio-group" id="gender-div">
                                       <label class="control-label">Gender :</label><br>
 			          	<label class="radio-inline">
                                             <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" required> Male
@@ -62,12 +62,22 @@
 		          		<label class="radio-inline">
                                             <input type="radio" name="optionsRadios" id="optionsRadios2" value="female" required> Female
 		          		</label>
-			          </div>             
+			          </div>  
+			           <div class="form-group">
+			           	<div class="col-md-6" id="gender-d" style="display:none">
+			          <font color="red">**user already exists</font>
+			        </div>
+			        </div>
+			        <div class="form-group">
+			           	<div class="col-md-6" id="gender-dd" style="display:none">
+			          <font color="red">**Email already registered</font>
+			        </div>
+			        </div>            
 			        </div>
 			        <div class="form-group">
 			          <div class="col-md-6">
 			            <label for="password" class="control-label">Password</label>
-                                    <input type="password" name = "password" class="form-control" id="password" placeholder="" required>
+                                    <input type="password" name = "password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" class="form-control" id="password" placeholder="" required>
 			          </div>
 			          <div class="col-md-6">
 			            <label for="password" class="control-label">Confirm Password</label>
@@ -128,7 +138,7 @@
 		          <div class="col-md-12">
 		          	<div class="control-wrapper">
 		          		<input type="submit" value="Log in" class="btn btn-info">
-		          		<a href="forgot-password.html" class="text-right pull-right">Forgot password?</a>
+		          		<a href="javascript:;" data-toggle="modal" data-target="#pass_modal" class="text-right pull-right">Forgot password?</a>
 		          	</div>
 		          </div>
 		        </div>
@@ -159,6 +169,25 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	      </div>
+
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="pass_modal" tabindex="-1" role="dialog" aria-labelledby="myModalPassLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalPassLabel">Password Reset</h4>
+	      </div>
+	      <div class="modal-body">
+                  <label><h3>Enter your mail<h3></label><br>
+                  <input type="text" name="forgot_mail" >
+                  	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">send</button>
+	      </div>
+	      
 	    </div>
 	  </div>
 	</div>
@@ -213,6 +242,63 @@
                     $("#signupdiv").slideToggle();
                 });
             });
+            
+            $("#username").blur(function(){
+                   var uid = $("#username").val();
+                   $.ajax({
+                       url:'check/',
+                       type:'POST',
+                       data:{'userid' : uid},
+                       success:function(response){
+                           if(response==="1") {
+                               $("#username").val("");
+                               $("#gender-div").hide();
+                                $("#gender-d").show();
+                               finalcheck1 = false;
+                           }else if(response==="0") {
+                               $("#gender-div").show();
+                               $("#gender-d").hide();
+                               // $("#user-ava-div").hide();
+                               finalcheck1 = true;
+                           }
+                       }
+                   });
+               });
+            $("#signup").submit(function(){
+            	var pass = document.getElementById("password").value;
+
+            	var cpass= document.getElementById("password_confirm").value;
+            		if(pass==cpass){
+            			return true;
+            		}else{
+            			alert("password did not match");
+            			return false;
+            		}
+            });
+            $("#email").blur(function(){
+                   var mail = $("#email").val();
+                   $.ajax({
+                       url:'checkm/',
+                       type:'POST',
+                       data:{'email' : mail},
+                       success:function(response){
+                           if(response==="1") {
+                               $("#email").val("");
+                               $("#username").hide();
+                               $("#tik").hide();
+                               $("#gender-dd").show();
+                               // $("#tik").hide();
+                               finalcheck1 = false;
+                           }else if(response==="0") {
+                               $("#gender-dd").hide();
+                               $("#tik").show();
+                                $("#username").show();
+                               finalcheck1 = true;
+                           }
+                       }
+                   });
+               });
+
             
         </script>
 </body>

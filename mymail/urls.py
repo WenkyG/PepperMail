@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
 
     url(r'^$', 'mymail.views.home'),
+    url(r'^check/$', 'mymail.views.check'),
+    url(r'^checkm/$', 'mymail.views.checki'),
     url(r'^registration/$', 'mymail.views.registered'),
 		url(r'^validate/inbox/$', 'mymail.views.user_validate'),
 		url(r'^success/$', 'mymail.views.success_login'),
